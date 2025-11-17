@@ -1,28 +1,48 @@
 import { Route, Routes } from 'react-router-dom'
 
-import { Layout } from '@components/common/Layout'
-import { Navigator} from '@components/common/Navigator'
+import { OverlayProvider } from '@components/common/OverlayContext';
+import { MainLayout } from '@components/common/MainLayout'
+import { SubLayout } from '@components/common/SubLayout';
 
 import { HomePage } from '@pages/home/HomePage'
 import { BoardPage } from '@pages/board/BoardPage'
 import { ProjectPage } from '@pages/project/ProjectPage'
 import { MyPage } from '@pages/my/MyPage'
+import { ProfileEdit } from '@pages/my/ProfileEdit'
+import { ProfileSelect } from '@pages/my/ProfileSelect'
+
+import { CategoryPage } from '@pages/home/category/CategoryPage';
+import { NotificationPage } from '@pages/home/notification/NotificationPage';
+import { SearchPage } from '@pages/home/search/SearchPage';
+import { BlockDetailPage } from '@pages/Block/BlockDetailPage'
+import { BlockEditPage } from '@pages/Block/BlockEditPage'
+import { BlockRegisterPage } from '@pages/Block/BlockRegisterPage'
 
 function App() {
   return (
-    <>
-      <Layout>
-        <Routes>
+    <OverlayProvider>
+      <Routes>
+        <Route element={<MainLayout />}>
           <Route path="/Home" element={<HomePage />} />
           <Route path="/Board" element={<BoardPage />} />
           <Route path="/Project" element={<ProjectPage />} />
           <Route path="/My" element={<MyPage />} />
-        </Routes>
-      </Layout>
-      <Navigator />
-    </>
 
+        </Route>
+        <Route element={<SubLayout />}>
+          <Route path="/Home/category" element={<CategoryPage />} />
+          <Route path="/Home/notification" element={<NotificationPage />} />
+          <Route path="/Home/search" element={<SearchPage />} />
+          <Route path="/My/ProfileEdit" element={<ProfileEdit />} />
+          <Route path="/My/ProfileSelect" element={<ProfileSelect />} />
+          <Route path="/Block/detail" element={<BlockDetailPage />} />
+          <Route path="/Block/edit" element={<BlockEditPage />} />
+          <Route path="/Block/register" element={<BlockRegisterPage />} />
+        </Route>
+      </Routes>
+    </OverlayProvider>
   )
+
 }
 
 export default App
