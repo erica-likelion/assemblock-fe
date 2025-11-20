@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const MyPageContainer = styled.div`
+export const ProfileContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -13,7 +13,7 @@ export const HeaderBar = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 0 auto;
+  margin: 0;
   opacity: 1;
 `;
 
@@ -21,6 +21,20 @@ export const HeaderSlot = styled.div`
   display: flex;
   align-items: center;
   top: 0;
+`;
+
+export const BackButton = styled.button`
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  aspect-ratio: 1/1;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const CenterTextBox = styled.div`
@@ -40,6 +54,7 @@ export const Profile = styled.div`
   align-items: center;
   max-width: 400px;
   gap: 20px;
+  margin: 0 20px;
 `;
 
 export const ProfileImg = styled.div`
@@ -95,6 +110,7 @@ export const Portfolio = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 8px;
+  margin: 16px auto 0;
 `;
 
 export const PortfolioItem = styled.div<{ $isL500?: boolean }>`
@@ -127,13 +143,33 @@ export const PortfolioDivider = styled.div`
 export const Review = styled.div`
   display: flex;
   width: 100%;
-  max-width: 335px;
+  max-width: 336px;
   flex-direction: column;
   align-items: flex-start;
-  margin-top: 36px;
+  margin: 36px auto 0;
   font-family: 'Pretendard', sans-serif;
   font-size: 14px;
   font-weight: 600;
+`;
+
+export const ReviewTitle = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 4px;
+`;
+
+export const ReviewBadge = styled.span`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #F05C5C;
+  color: #FAFAFA;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1;
 `;
 
 export const ReviewTabContainer = styled.div`
@@ -160,7 +196,6 @@ export const ReviewBlock = styled.div`
   width: 100%;
   max-width: 335px;
   min-height: 255px;
-  background: border-radius: 16px;
   background: var(--GrayScale-GR10, #F0EFF1);
   border-radius: 16px;
   display: flex;
@@ -181,22 +216,6 @@ export const ReviewBlockText = styled.div`
   line-height: 150%;
   color: #868286;
   text-align: center;
-`;
-
-export const ProfileEditButton = styled.button`
-  display: flex;
-  width: 100%;
-  max-width: 335px;
-  padding: 12px 10px;
-  justify-content: center;
-  align-items: center;
-  gap: 32px;
-  border-radius: 16px;
-  background: var(--Primary-BK, #352F36);
-  margin: 32px auto 24px;
-  color: #FAFAFA;
-  border: none;
-  cursor: pointer;
 `;
 
 export const MyBlock = styled.div`
@@ -246,7 +265,6 @@ export const BlockContent = styled.div`
   width: 100%;
   max-width: 335px;
   min-height: 255px;
-  background: border-radius: 16px;
   background: var(--GrayScale-WT, #FAFAFA);
   border-radius: 16px;
   display: flex;
