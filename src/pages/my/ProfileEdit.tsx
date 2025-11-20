@@ -43,6 +43,7 @@ export function ProfileEdit() {
   const [portfolioFile, setPortfolioFile] = useState<File | null>(null);
   const [fileName, setFileName] = useState('');
   const [selectedProfile, setSelectedProfile] = useState<ProfileData | null>(null);
+  const [isComposing, setIsComposing] = useState(false);
 
   useEffect(() => {
     // localStorage에서 선택된 프로필 정보 읽기(추후 연결해서 수정)
@@ -105,6 +106,24 @@ export function ProfileEdit() {
   };
 
   const handleSave = async () => {
+    // 닉네임 유효성 검사
+    if (!nickname || nickname.trim().length === 0) {
+      alert('닉네임을 입력해주세요.');
+      return;
+    }
+    
+    if (nickname.length > 5) {
+      alert('닉네임은 5자까지 입력할 수 있어요.');
+      return;
+    }
+    
+    // 한/영문 및 숫자만 허용하는지 확인
+    const nicknameRegex = /^[a-zA-Z0-9가-힣]+$/;
+    if (!nicknameRegex.test(nickname)) {
+      alert('닉네임은 한/영문 및 숫자만 입력할 수 있어요.');
+      return;
+    }
+    
     // localStorage에 프로필 데이터 저장 나중에 연결하기
     let fileData = '';
     if (portfolioFile) {
@@ -179,10 +198,27 @@ export function ProfileEdit() {
           <InputWrapper>
             <InputField
               type="text"
-              placeholder="이전 닉네임"
+              placeholder="이전 닉네임" //추후 수정 필요 초기설정한 닉네임 받아와야함 디폴트도 유저네임이 아니라 온보딩에서 받은 네임으로...
               value={nickname}
-              onChange={(e) => setNickname(e.target.value)}
-              maxLength={12}
+              onChange={(e) => {
+                const value = e.target.value;
+                // 조합 중이 아닐 때만 필터링
+                if (!isComposing) {
+                  // 한/영문 및 숫자만 허용
+                  const regex = /^[a-zA-Z0-9가-힣]*$/;
+                  if (regex.test(value)) {
+                    setNickname(value);
+                  }
+                } else {
+                  // 조합 중일 때는 일단 허용 (조합 완료 후 검증)
+                  setNickname(value);
+                }
+              }}
+              onCompositionStart={() => setIsComposing(true)}
+              onCompositionEnd={() => {
+                setIsComposing(false);
+              }}
+              maxLength={5}
             />
             {nickname && (
               <ClearButton onClick={() => setNickname('')}>
@@ -192,7 +228,7 @@ export function ProfileEdit() {
               </ClearButton>
             )}
           </InputWrapper>
-          <HelperText>닉네임은 한/영문 및 숫자 12자까지 입력할 수 있어요</HelperText>
+          <HelperText>닉네임은 한/영문 및 숫자 5자까지 입력할 수 있어요</HelperText>
         </FormSection>
 
         <FormSection>
@@ -223,7 +259,7 @@ export function ProfileEdit() {
           <InputWrapper>
             <InputField
               type="text"
-              placeholder="이전 한 줄 소개"
+              placeholder="이전 한 줄 소개" //추후 수정 필요 초기설정한 한 줄 소개 받아와야함
               value={introduction}
               onChange={(e) => setIntroduction(e.target.value)}
               maxLength={36}

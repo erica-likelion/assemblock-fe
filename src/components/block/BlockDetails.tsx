@@ -1,5 +1,6 @@
 // src/components/block/BlockDetails.tsx
 import { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useOverlay } from '@components/common/OverlayContext';
 import CancelGuide from './CancleGuide.tsx';
 
@@ -18,7 +19,7 @@ interface BlockDetailsProps {
 type BlockPart = 'design' | 'frontend' | 'backend';
 
 export default function BlockDetails({ isSkill }: BlockDetailsProps) {
-
+    const navigate = useNavigate();
     const [isSkillState, setIsSkillState] = useState(isSkill);
     const [blockTitle, setBlockTitle] = useState('');
     const [selectedParts, setSelectedParts] = useState<BlockPart[]>([]);
@@ -97,9 +98,27 @@ export default function BlockDetails({ isSkill }: BlockDetailsProps) {
 
         logFormData(formRef.current);
 
+        // localStorage에 블록 데이터 저장
+        const newBlock = {
+            id: `block_${Date.now()}`,
+            blockTitle: blockTitle,
+            selectedParts: selectedParts,
+            blockType: isSkillState ? 'TECHNOLOGY' : 'IDEA',
+            onelineSummary: onelineSummary,
+            createdAt: new Date().toISOString(),
+        };
+
+        // 기존 블록 목록 가져오기
+        const existingBlocks = localStorage.getItem('registeredBlocks');
+        const blocks = existingBlocks ? JSON.parse(existingBlocks) : [];
+        blocks.push(newBlock);
+        localStorage.setItem('registeredBlocks', JSON.stringify(blocks));
+
         const response = await submitFormData(formRef.current, 'https://your-backend-url.com/submit');
         if (response.ok) {
             console.log('전송 성공');
+            // 저장 후 MyPage로 이동
+            navigate('/My');
         } else {
             console.error('전송 실패');
         }

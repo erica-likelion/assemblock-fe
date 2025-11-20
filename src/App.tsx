@@ -17,6 +17,7 @@ import { SearchPage } from '@pages/home/search/SearchPage';
 import { BlockDetailPage } from '@pages/Block/BlockDetailPage'
 import { BlockEditPage } from '@pages/Block/BlockEditPage'
 import { BlockRegisterPage } from '@pages/Block/BlockRegisterPage'
+import { OtherUserProfile } from '@pages/OtherUser/OtherUserProfile';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           <Route path="/Home/search" element={<SearchPage />} />
           <Route path="/My/ProfileEdit" element={<ProfileEdit />} />
           <Route path="/My/ProfileSelect" element={<ProfileSelect />} />
+          <Route path="/OtherUser/Profile" element={<OtherUserProfile />} />
           <Route path="/Block/detail" element={<BlockDetailPage />} />
           <Route path="/Block/edit" element={<BlockEditPage />} />
           <Route path="/Block/register" element={<BlockRegisterPage />} />
