@@ -95,6 +95,7 @@ export const Portfolio = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 8px;
+  margin: 16px auto 0;
 `;
 
 export const PortfolioItem = styled.div<{ $isL500?: boolean }>`
@@ -127,7 +128,7 @@ export const PortfolioDivider = styled.div`
 export const Review = styled.div`
   display: flex;
   width: 100%;
-  max-width: 335px;
+  max-width: 336px;
   flex-direction: column;
   align-items: flex-start;
   margin-top: 36px;
@@ -235,15 +236,9 @@ export const BlockTab = styled.div<{ $isActive?: boolean }>`
   transition: background 0.2s, color 0.2s;
 `;
 
-export const BlockListWrapper = styled.div`
-  width: 100%;
-  margin-top: 24px;
-  max-width: 335px;
-  min-height: auto;
-`;
-
 export const BlockContent = styled.div`
   width: 100%;
+  margin-top: 24px;
   max-width: 335px;
   min-height: 255px;
   background: border-radius: 16px;

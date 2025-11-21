@@ -25,7 +25,6 @@ import {
   MyBlockHeader,
   BlockdivTab,
   BlockTab,
-  BlockListWrapper,
   BlockContent,
   BlockContentImage,
   BlockContentText,
@@ -35,16 +34,11 @@ import linkIcon from '@assets/MyPage/link.svg';
 import folderIcon from '@assets/MyPage/folder.svg';
 import ReviewBlockDefault from '@assets/MyPage/ReviewBlockDefault.svg';
 import AssemBlcokDefault from '@assets/MyPage/AssemBlcokDefault.svg';
-import Img1 from '@assets/common/ProfileImg/Img1.svg';
 import { ProfileAct, type ProfileData } from '@components/common/ProfileAct';
-import BlockList from '@components/block/MyBlockCard';
-import type { ReviewData } from '../../types/database';
 
 export function MyPage() {
     const [activeTab, setActiveTab] = useState<'all' | 'idea' | 'tech'>('all');
     const [activeReviewTab, setActiveReviewTab] = useState<'received' | 'sent'>('received');
-    const [reviews, setReviews] = useState<ReviewData[]>([]);
-    const [hasReviews, setHasReviews] = useState(false);
     const [selectedProfile, setSelectedProfile] = useState<ProfileData | null>(null);
     const [userProfile, setUserProfile] = useState<{
       nickname: string;
@@ -54,7 +48,6 @@ export function MyPage() {
       fileName: string;
       fileData?: string;
     } | null>(null);
-    const [hasBlocks, setHasBlocks] = useState(false);
     const navigate = useNavigate();
 
     const parts = [
@@ -87,29 +80,6 @@ export function MyPage() {
           console.error('Failed to parse saved user profile:', e);
         }
       }
-      
-      // localStorage에서 저장된 블록 목록 확인
-      const savedBlocks = localStorage.getItem('registeredBlocks');
-      if (savedBlocks) {
-        try {
-          const blocks = JSON.parse(savedBlocks);
-          setHasBlocks(blocks && blocks.length > 0);
-        } catch (e) {
-          console.error('Failed to parse saved blocks:', e);
-        }
-      }
-      
-      // localStorage에서 저장된 후기 목록 확인 (추후 연결)
-      const savedReviews = localStorage.getItem('reviews');
-      if (savedReviews) {
-        try {
-          const parsedReviews = JSON.parse(savedReviews) as ReviewData[];
-          setReviews(parsedReviews);
-          setHasReviews(parsedReviews && parsedReviews.length > 0);
-        } catch (e) {
-          console.error('Failed to parse saved reviews:', e);
-        }
-      }
     }, []);
     
     return (
@@ -126,24 +96,14 @@ export function MyPage() {
             {selectedProfile ? (
               <ProfileAct profile={selectedProfile} isSelected={true} size="small" />
             ) : (
-              <ProfileAct 
-                profile={{
-                  id: 'img1',
-                  src: Img1,
-                  alt: 'backend',
-                  colorMap: {
-                    '#C2C1C3': '#2E3B00',
-                    '#F0EFF1': '#B8EB00'
-                  }
-                }} 
-                isSelected={true} 
-                size="small" 
-              />
+              <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none">
+                <circle cx="32" cy="32" r="32" fill="#D9D9D9"/>
+              </svg>
             )}
           </ProfileImg>
           <RightColumn>
             <UserInfo>
-              <strong className='l600'>{userProfile?.nickname ? `${userProfile.nickname}님` : 'Username 님'}</strong>
+              <strong className='l600'>{userProfile?.nickname ? `${userProfile.nickname}님` : 'Username'}</strong>
               {userProfile?.selectedParts && userProfile.selectedParts.length > 0 && (
                 <>
                   {userProfile.selectedParts.map((partId) => {
@@ -224,7 +184,8 @@ export function MyPage() {
 
         </Portfolio>
         <Review>나의 후기블록 
-          {hasReviews && (
+          {/*블록 등록이랑 연결해서 조건식으로 바꾸기*/}
+          {false && (
             <ReviewTabContainer>
               <ReviewTab 
                 $isActive={activeReviewTab === 'received'}
@@ -240,26 +201,15 @@ export function MyPage() {
               </ReviewTab>
             </ReviewTabContainer>
           )}
-          {!hasReviews ? (
-            <ReviewBlock>
-              <ReviewBlockImage src={ReviewBlockDefault} alt="Review Block Default" />
-              <ReviewBlockText>아직 받은 후기 블록이 없어요</ReviewBlockText>
-            </ReviewBlock>
-          ) : (
-            <ReviewBlock>
-              {/* 추후 연결: 받은 후기/보낸 후기 목록 렌더링 */}
-              {activeReviewTab === 'received' ? (
-                <ReviewBlockText>받은 후기 목록 (추후 연결)</ReviewBlockText>
-              ) : (
-                <ReviewBlockText>보낸 후기 목록 (추후 연결)</ReviewBlockText>
-              )}
-            </ReviewBlock>
-          )}
+          <ReviewBlock>
+            <ReviewBlockImage src={ReviewBlockDefault} alt="Review Block Default" />
+            <ReviewBlockText>아직 받은 후기 블록이 없어요</ReviewBlockText>
+          </ReviewBlock>
         </Review>
         <MyBlock>
           <MyBlockHeader>나의 어셈블록</MyBlockHeader>
           {/*블록 등록이랑 연결해서 조건식으로 바꾸기*/}
-          {hasBlocks && (
+          {false && (
             <BlockdivTab>
               <BlockTab 
                 $isActive={activeTab === 'all'}
@@ -281,16 +231,10 @@ export function MyPage() {
               </BlockTab>
             </BlockdivTab>
           )}
-          <BlockListWrapper>
-            {hasBlocks ? (
-              <BlockList activeTab={activeTab} />
-            ) : (
-              <BlockContent>
-                <BlockContentImage src={AssemBlcokDefault} alt="Assem Block Default" />
-                <BlockContentText>아직 등록한 어셈블록이 없어요</BlockContentText>
-              </BlockContent>
-            )}
-          </BlockListWrapper>
+          <BlockContent>
+            <BlockContentImage src={AssemBlcokDefault} alt="Assem Block Default" />
+            <BlockContentText>아직 등록한 어셈블록이 없어요</BlockContentText>
+          </BlockContent>
         </MyBlock>
       </MyPageContainer>
     )
