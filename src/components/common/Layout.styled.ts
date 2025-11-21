@@ -5,18 +5,11 @@ export const LayoutContainer = styled.div`
   min-width: 375px;
   max-width: 400px;
   height: 100vh;
-  background: #FAFAFA;
+  background: #F2F2F2;
   padding-top: 48px;
+  padding-bottom: 99px;
+  margin: 0 auto;
+  overflow: auto;
   padding-left: 20px;
   padding-right: 20px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-`;
-
-export const Content = styled.div`
-  flex: 1;              // 남은 공간 모두 차지
-  overflow-y: auto;
-  padding-bottom: 99px;
 `;
