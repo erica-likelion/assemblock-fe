@@ -5,9 +5,9 @@ export function logFormData(formElement: HTMLFormElement) {
   }
 }
 
-export async function submitFormData(formElement: HTMLFormElement) {
+export async function submitFormData(formElement: HTMLFormElement, url: string) {
   const formData = new FormData(formElement);
-  const response = await fetch('https://your-backend-url.com/submit', {
+  const response = await fetch(url, {
     method: 'POST',
     body: formData,
   });

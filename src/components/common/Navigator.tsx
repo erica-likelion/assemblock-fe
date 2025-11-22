@@ -2,7 +2,7 @@ import { useLocation } from "react-router-dom";
 import * as S from './Navigator.styled'
 
 import homeActive from '@assets/common/Nav/home-active.svg'
-import homeInactive from '@assets/common/Nav/home-Inactive.svg'
+import homeInactive from '@assets/common/Nav/home-inactive.svg'
 import projectActive from '@assets/common/Nav/project-active.svg'
 import projectInactive from '@assets/common/Nav/project-inactive.svg'
 import boardActive from '@assets/common/Nav/board-active.svg'
@@ -21,7 +21,7 @@ export const Navigator = () => {
 
   return (
     <S.NavBar>
-      <S.NavItem to="/" aria-label="Home">
+      <S.NavItem to="/Home" aria-label="Home">
         <S.Icon src={isHome ? homeActive : homeInactive} alt="home" />
         <S.Label className='l500' $active={isHome}>홈</S.Label>
       </S.NavItem>
