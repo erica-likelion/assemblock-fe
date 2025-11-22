@@ -20,7 +20,6 @@ import statusIcons from "@assets/board/nav/status.svg";
 
 import closeIcon from "@assets/board/close.svg";
 
-// 🔹 App이랑 상세페이지에서도 같이 쓸 타입
 export type Board = {
   id: number;
   title: string;
@@ -83,7 +82,7 @@ export const BoardPage: React.FC<BoardPageProps> = ({ boards, setBoards }) => {
   return (
     <div style={rootStyle}>
       <div style={styles.pageInner}>
-        {/* 상단 고정 영역 (상태바 + 탑네비) */}
+        {/* 상단 고정 영역 */}
         <div style={styles.headerFixed}>
           {/* 상태바 */}
           <div style={styles.statusBar}>
@@ -157,7 +156,7 @@ export const BoardPage: React.FC<BoardPageProps> = ({ boards, setBoards }) => {
           </div>
         </main>
 
-        {/* 생성 버튼 (플로팅) */}
+        {/* 생성 버튼 */}
         <button
           type="button"
           style={styles.floatingAddBtn}
@@ -205,7 +204,6 @@ export const BoardPage: React.FC<BoardPageProps> = ({ boards, setBoards }) => {
                 value={boardTitle}
                 onChange={(e) => {
                   const raw = e.target.value;
-                  // 한글/영문/숫자/특수문자만 허용
                   const filtered = raw.replace(
                     /[^ㄱ-ㅎ가-힣a-zA-Z0-9\s~`!@#$%^&*()\-_=+\[\]{}\\|;:'",.<>/?]/g,
                     ""
