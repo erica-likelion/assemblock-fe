@@ -5,7 +5,7 @@ import { Layout } from "@components/common/Layout";
 import { Navigator } from "@components/common/Navigator";
 
 import { HomePage } from "@pages/home/HomePage";
-import { BoardPage, Board } from "@pages/board/BoardPage";
+import { BoardPage } from "./pages/board/BoardPage";
 import { BoardDetailPage } from "@pages/board/BoardDetailPage";
 import { ProjectPage } from "@pages/project/ProjectPage";
 import { MyPage } from "@pages/my/MyPage";

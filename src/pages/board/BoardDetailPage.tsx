@@ -26,7 +26,6 @@ export const BoardDetailPage: React.FC<BoardDetailPageProps> = ({
   const location = useLocation();
   const { boardId } = (location.state || {}) as LocationState;
 
-  // 현재 보드 찾기 (없으면 첫 번째 보드 사용)
   const board = boards.find((b) => b.id === boardId) ?? boards[0];
 
   if (!board) {
@@ -44,7 +43,6 @@ export const BoardDetailPage: React.FC<BoardDetailPageProps> = ({
 
   const blockText = `${board.blocks}블록`;
 
-  // 🔥 뒤로가기 시 수정된 제목/메모 저장
   const handleBack = () => {
     setBoards((prev) =>
       prev.map((b) =>
