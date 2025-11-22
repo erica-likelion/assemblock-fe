@@ -10,13 +10,13 @@ export const NavBar = styled.nav`
   justify-content: space-around;
   align-items: center;
 
-  background: #FFFFFF;
+  background: #ffffff;
   width: 100%;
   min-width: 375px;
   max-width: 400px;
   height: 99px;
 
-  border-top: 1px solid #F0EFF1;
+  border-top: 1px solid #f0eff1;
   border-radius: 20px 20px 0 0;
   z-index: 50;
 `;
