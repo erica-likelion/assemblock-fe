@@ -53,7 +53,6 @@ const getMemberPartLabel = (
 export function ProposalDetailPage() {
   const { proposalId } = useParams<{ proposalId: string }>();
   const proposalIdNum = Number(proposalId);
-  const navigate = useNavigate();
 
   const [myUserId, setMyUserId] = useState<number | null>(null);
 
